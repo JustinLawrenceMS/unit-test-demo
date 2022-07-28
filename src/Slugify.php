@@ -26,6 +26,13 @@ class Slugify
 		return $this->string;
 
 	}
+	
+	public function removeDoubleHyphens($string){
 
+		$this->string = str_replace('--', '-', $string);
+
+		return $this->string;
+
+	}
 }
 ?>
