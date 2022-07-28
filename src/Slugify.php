@@ -17,7 +17,11 @@ class Slugify
 
 	public function changeSpacesToHyphens($string){
 
-		$this->string = str_replace(' ', '-', $string);
+		$this->string = preg_replace([
+						'/ /',
+						'/,/',
+						'/!/' ], 
+							'-', $string);
 
 		return $this->string;
 

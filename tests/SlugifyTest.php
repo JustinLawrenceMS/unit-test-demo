@@ -15,6 +15,8 @@ class SlugifyTest extends TestCase
 
 		$slug = $slugify->changeSpacesToHyphens($string);
 
+		echo "\n\n$slug\n\n";
+
 		$this->assertSame(false, strpos($slug, ' '));
 
 	}
