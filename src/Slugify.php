@@ -24,11 +24,4 @@ class Slugify
 	}
 
 }
-
-$slug = new Slugify;
-
-$slugified = $slug->changeSpacesToHyphens("be excellent to eachother, and party on!");
-
-echo $slugified;
-
 ?>
