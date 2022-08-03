@@ -8,43 +8,41 @@ class SlugifyTest extends TestCase
 {
 	
 	public $string = "Be excellent to one another, and party on, dudes!";
-	public $slug;
 
-	public function helperSetSlug(){
-
-		$slug = new Slugify;
-
-		$this->slug = $slug->changeSpacesToHyphens($this->string);
-
-	}
-
+	
 	public function test_spaces_are_changed_to_hyphens(){
 
-		
-		if(empty($this->slug)){
+		$slugify = new Slugify;
 
-			$this->helperSetSlug();
+		$slug = $slugify->changeSpacesToHyphens($this->string);
 
-		}
-		echo "\n\n$this->slug\n\n";
+		$this->assertSame(false, strpos($slug, ' '));
 
-		$this->assertSame(false, strpos($this->slug, ' '));
+
+		print "\n\n$slug\n\n"; 
+
+		return $slug;
 
 	}
-	public function test_double_hyphens_removed(){
 
-		if(empty($this->slug)){
+	/**
+	* @depends test_spaces_are_changed_to_hyphens
+	*/
 
-			$this->slug = $this->helperSetSlug();//TODO write setter
+	public function test_double_hyphens_removed(string $slug): string
 
-		}
-		$slug = new Slugify;
+	{
 
-		$this->slug = $slug->removeDoubleHyphens($this->slug);
+		$slugify = new Slugify;
 
-		echo "\n\n$this->slug\n\n";
+		$slug = $slugify->removeDoubleHyphens($slug);
 
-		$this->assertSame(false, strpos($this->slug, '--'));
+		$this->assertSame(false, strpos($slug, '--'));
+		
+
+		print "\n\n$slug\n\n"; 
+
+		return $slug;
 
 	}
 
