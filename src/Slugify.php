@@ -9,7 +9,7 @@ class Slugify
 
 	public function trimString($string){
 
-		$this->string = trim($string);
+		$this->string = trim($string, '-');
 
 		return $this->string;	
 

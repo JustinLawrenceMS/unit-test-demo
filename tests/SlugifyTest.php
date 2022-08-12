@@ -46,6 +46,30 @@ class SlugifyTest extends TestCase
 
 	}
 
+	/**
+	* @depends test_double_hyphens_removed
+	*/
+
+	public function test_string_is_trimmed(string $slug): string
+
+	{
+
+		$slugify = new Slugify;
+
+		$slug = $slugify->trimString($slug);
+
+		$finalChar = substr($slug, -1);
+		
+		$this->assertNotSame('-', $finalChar);
+
+		$this->assertNotSame(' ', $finalChar);
+
+		print "\n\n$slug\n\n";
+
+		return $slug;
+
+	}
+
 }
 
 ?>
