@@ -9,7 +9,7 @@ class Slugify
 
 	public function trimString($string){
 
-		$this->string = trim($string);
+		$this->string = trim($string, '-');
 
 		return $this->string;	
 
@@ -17,11 +17,22 @@ class Slugify
 
 	public function changeSpacesToHyphens($string){
 
-		$this->string = str_replace(' ', '-', $string);
+		$this->string = preg_replace([
+						'/ /',
+						'/,/',
+						'/!/' ], 
+							'-', $string);
 
 		return $this->string;
 
 	}
+	
+	public function removeDoubleHyphens($string){
 
+		$this->string = str_replace('--', '-', $string);
+
+		return $this->string;
+
+	}
 }
 ?>
