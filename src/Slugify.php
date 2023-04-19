@@ -4,35 +4,36 @@ namespace App;
 
 class Slugify
 {
+    
+    public $string;
 
-	public $string;
+    public function trimString($string){
 
-	public function trimString($string){
+        $this->string = trim($string, '-');
 
-		$this->string = trim($string, '-');
+        return $this->string;
 
-		return $this->string;	
+    }
 
-	}
+    public function changeSpacesToHyphens($string){
 
-	public function changeSpacesToHyphens($string){
+        $this->string = preg_replace([
+            '/ /',
+            '/,/',
+            '/!/' 
+        ], 
+        '-', 
+        $string);
 
-		$this->string = preg_replace([
-						'/ /',
-						'/,/',
-						'/!/' ], 
-							'-', $string);
+        return $this->string;
 
-		return $this->string;
+    }
+    public function removeDoubleHyphens($string){
 
-	}
-	
-	public function removeDoubleHyphens($string){
+        $this->string = str_replace('--', '-', $string);
 
-		$this->string = str_replace('--', '-', $string);
+        return $this->string;
 
-		return $this->string;
-
-	}
+    }
 }
 ?>

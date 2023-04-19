@@ -6,69 +6,65 @@ use PHPUnit\Framework\TestCase;
 
 class SlugifyTest extends TestCase
 {
-	
-	public $string = "Be excellent to one another, and party on, dudes!";
 
-	
-	public function test_spaces_are_changed_to_hyphens(){
+    public $string = "Be excellent to one another, and party on, dudes!";
 
-		$slugify = new Slugify;
+    public function test_spaces_are_changed_to_hyphens(){
 
-		$slug = $slugify->changeSpacesToHyphens($this->string);
+        $slugify = new Slugify;
 
-		$this->assertSame(false, strpos($slug, ' '));
+        $slug = $slugify->changeSpacesToHyphens($this->string);
 
+        $this->assertSame(false, strpos($slug, ' '));
 
-		print "\n\n$slug\n\n"; 
+        print "\n\n$slug\n\n"; 
 
-		return $slug;
+        return $slug;
 
-	}
+    }
 
-	/**
-	* @depends test_spaces_are_changed_to_hyphens
-	*/
+    /**
+    * @depends test_spaces_are_changed_to_hyphens
+    */
 
-	public function test_double_hyphens_removed(string $slug): string
+    public function test_double_hyphens_removed(string $slug): string
 
-	{
+    {
 
-		$slugify = new Slugify;
+        $slugify = new Slugify;
 
-		$slug = $slugify->removeDoubleHyphens($slug);
+        $slug = $slugify->removeDoubleHyphens($slug);
 
-		$this->assertSame(false, strpos($slug, '--'));
-		
+        $this->assertSame(false, strpos($slug, '--'));
 
-		print "\n\n$slug\n\n"; 
+        print "\n\n$slug\n\n"; 
 
-		return $slug;
+        return $slug;
 
-	}
+    }
 
-	/**
-	* @depends test_double_hyphens_removed
-	*/
+    /**
+    * @depends test_double_hyphens_removed
+    */
 
-	public function test_string_is_trimmed(string $slug): string
+    public function test_string_is_trimmed(string $slug): string
 
-	{
+    {
+        $slugify = new Slugify;
 
-		$slugify = new Slugify;
+        $slug = $slugify->trimString($slug);
 
-		$slug = $slugify->trimString($slug);
+        $finalChar = substr($slug, -1);
 
-		$finalChar = substr($slug, -1);
-		
-		$this->assertNotSame('-', $finalChar);
+        $this->assertNotSame('-', $finalChar);
 
-		$this->assertNotSame(' ', $finalChar);
+        $this->assertNotSame(' ', $finalChar);
 
-		print "\n\n$slug\n\n";
+        print "\n\n$slug\n\n";
 
-		return $slug;
+        return $slug;
 
-	}
+    }
 
 }
 
